@@ -4,6 +4,8 @@ from django.http import Http404
 from django.utils.encoding import escape_uri_path
 from django.views import View
 
+from main.constants import views_list
+
 
 class BaseView(View):
     def __init__(self, **kwargs):
@@ -13,7 +15,7 @@ class BaseView(View):
         uri = escape_uri_path(request.path)
         segments = uri.lstrip('/').rstrip('/').split('/')
         segment_count = len(segments)
-        if segments[segment_count-1] == '':
+        if segments[segment_count-1] == '' or segments[segment_count-1] in views_list:
             handler = getattr(self, 'index', None)
         else:
             method_name = segments[segment_count-1].lower()

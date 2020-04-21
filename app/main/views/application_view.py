@@ -10,8 +10,8 @@ class ApplicationView(BaseView):
         return render(request, 'templates/index.html', {'': ''})
         # return TemplateResponse(request, 'main/templates/index.html')
 
-    def demo(self, request: HttpRequest, **kwargs):
+    def vendor(self, request: HttpRequest, **kwargs):
         demo = {'name': 'deepak malhotra'}
-        return TemplateResponse(request, 'templates/third-party.html', {
+        return TemplateResponse(request, 'templates/vendor.html', {
             'name': demo
         })
