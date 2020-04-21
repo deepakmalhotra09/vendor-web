@@ -1,0 +1,4 @@
+gunicorn==20.0.4
+mysqlclient==1.4.6
+django==2.2.12
+mysql-connector-python==8.0.11
