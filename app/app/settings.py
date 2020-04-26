@@ -51,6 +51,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# CSRF_USE_SESSIONS = True
+# CSRF_COOKIE_HTTPONLY = True
+# CSRF_COOKIE_NAME = 'sstoken'
+# CSRF_COOKIE_SECURE = False
+
 ROOT_URLCONF = 'app.urls'
 
 TEMPLATES = [
@@ -73,6 +78,7 @@ TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
 )
+
 
 WSGI_APPLICATION = 'app.wsgi.application'
 
@@ -135,7 +141,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
@@ -145,3 +150,17 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "components")
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'WARNING',
+    },
+}

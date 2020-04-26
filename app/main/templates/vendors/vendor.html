@@ -1,0 +1,63 @@
+{% extends "templates/common/app.html" %}
+
+{% block title %}Vendors{% endblock %}
+{% block content %}
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Vendors</h1>
+        <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" href="/vendor/add"><i
+                class="fas fa-download fa-sm text-white-50"></i> Add New</a>
+    </div>
+
+    <!-- Content Row -->
+    <div class="">
+
+        <!-- Content Column -->
+
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Vendors</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table cellspacing="0" class="table table-bordered" id="dataTable" width="100%">
+                        <thead>
+                        <tr>
+                            <th>S no.</th>
+                            <th>Name</th>
+                            <th>Mobile</th>
+                            <th>Create Time</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for vendor in vendors_list%}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{vendor.name}}</td>
+                            <td>{{vendor.mobile_no}}</td>
+                            <td>{{vendor.create_time}}</td>
+                            <td>
+                                <a href="/vendor/edit/{{vendor.id}}" target="_self">Edit</a> |
+                                <a class="delete_record" data-id="{{vendor.id}}"
+                                   data-method-name="delete_vendor"
+                                   href="javascript:void(0);">Delete</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<!-- /.container-fluid -->
+{% endblock %}

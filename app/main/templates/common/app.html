@@ -35,12 +35,13 @@
         <!-- Main Content -->
         <div id="content">
             {% include "templates/common/top_bar.html" %}
+            <!--    Main content of each template will be included here        -->
             {% block content %}{% endblock %}
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2019</span>
+                        <span>Copyright &copy; Deepak Malhotra </span>
                     </div>
                 </div>
             </footer>
@@ -84,6 +85,12 @@
 
 <!-- Custom scripts for all pages-->
 <script src="{% static 'js/sb-admin-2.min.js' %}"></script>
+<script src="{% static 'js/common.js' %}"></script>
+
+<!-- plugin for datatable-->
+<script src="{% static 'js/third-party/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'js/third-party/dataTables.bootstrap4.min.js' %}"></script>
+
 
 <!-- Page level plugins -->
 <!--  <script src="{% static 'js/third-party/Chart.min.js' %}"></script>-->

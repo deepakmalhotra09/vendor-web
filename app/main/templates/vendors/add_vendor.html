@@ -1,0 +1,91 @@
+{% extends "templates/common/app.html" %}
+
+{% block title %}Vendors{% endblock %}
+{% block content %}
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Add Vendor</h1>
+        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+    </div>
+
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row ">
+                <div class="col-lg-3"></div>
+                <div class="col-lg-6">
+                    <div class="p-5">
+                        <div class="text-center">
+                            <!--                <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>-->
+                        </div>
+                        <form class="add_vendor_form" id="vendor_form" method="post" name="">
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <input class="form-control" name="vendor_name" placeholder="Name" type="text">
+                                </div>
+                                <div class="col-sm-6">
+                                    <input class="form-control" name="vendor_mobile" placeholder="Mobile No."
+                                           type="text">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" name="vendor_email" placeholder="Email Address"
+                                       type="email">
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" name="vendor_address" placeholder="Address" type="text">
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <select class="form-control country_list" data-country="append"
+                                            name="vendor_country">
+                                        <option code="">Select country</option>
+                                    </select>
+                                    <input class="country_code" name="vendor_country_code" type="hidden" value="">
+                                </div>
+                                <div class="col-sm-6">
+                                    <input class="form-control" name="vendor_zip_code" placeholder="Zip Code"
+                                           type="number">
+                                </div>
+                            </div>
+                            <div class="">
+                                <input class="company_details_c_b" id="vendor_company_details" type="checkbox">
+                                <label for="vendor_company_details">Company Details (Optional)</label>
+                            </div>
+                            <div class="company_details d-none">
+                                <div class="form-group row" style="padding-top:10px;">
+                                    <div class="col-sm-12">
+                                        <input class="form-control" name="vendor_c_n" placeholder="Company Name"
+                                               type="text">
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col-sm-12">
+                                        <input class="form-control" name="vendor_c_email" placeholder="Company Email"
+                                               type="email">
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col-sm-12">
+                                        <input class="form-control" name="vendor_c_w" placeholder="Company Website"
+                                               type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <input class="btn btn-success" type="submit">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<!-- /.container-fluid -->
+
+{% endblock %}

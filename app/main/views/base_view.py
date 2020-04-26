@@ -1,5 +1,3 @@
-import re
-
 from django.http import Http404
 from django.utils.encoding import escape_uri_path
 from django.views import View
@@ -18,10 +16,11 @@ class BaseView(View):
         if segments[segment_count-1] == '' or segments[segment_count-1] in views_list:
             handler = getattr(self, 'index', None)
         else:
-            method_name = segments[segment_count-1].lower()
-            method_name = re.sub('[^a-z0-9]', '', method_name)
+            method_name = segments[segment_count - 1].lower()
+            print(method_name)
+            # method_name = re.sub('[^a-z0-9]', '', method_name)
             handler = getattr(self, method_name, None)
-
+        print(handler)
         if handler is not None:
             return handler(request)
         else:
