@@ -1,0 +1,100 @@
+{% extends "templates/common/app.html" %}
+{% load app_filters %}
+{% block title %}Clients{% endblock %}
+{% block content %}
+<!-- Begin Page Content -->
+<div class="container-fluid" xmlns:vendor.property xmlns:vendor.property>
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">{% if update_client %} Edit {% else %} Add {% endif %} Client</h1>
+    </div>
+
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row ">
+                <div class="col-lg-3"></div>
+                <div class="col-lg-6">
+                    <div class="p-5">
+                        <div class="text-center">
+                            <!--                <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>-->
+                        </div>
+                        <input id="form_method_name" type="hidden" value="add_client">
+                        <input id="list_slug" type="hidden" value="client">
+                        <form class="add_client_form" id="page_form" method="post" name="">
+                            <input name="client_id" type="hidden"
+                                   value="{% if not client.id %}0{% else %}{{client.id}}{%endif%}">
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <input class="form-control" name="client_name" placeholder="Name" type="text"
+                                           value="{{client.name}}">
+                                </div>
+                                <div class="col-sm-6">
+                                    <input class="form-control" name="client_mobile" placeholder="Mobile No."
+                                           type="text" value="{{client.mobile_no}}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" name="client_email" placeholder="Email Address"
+                                       type="email" value="{{client.email}}">
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" name="client_address" placeholder="Address" type="text"
+                                       value="{{client.property|get_key:'address'}}">
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <select class="form-control country_list" data-country="append"
+                                            name="client_country">
+                                        <option code="">Select country</option>
+                                        {% for country in country_list %}
+                                        <option client.property|get_key: code="{{country.code}}" country.code== if {%
+                                        'country_code' %} selected {% endif %}>{{country.name}}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <input class="country_code" name="client_country_code" type="hidden" value="">
+                                </div>
+                                <div class="col-sm-6">
+                                    <input class="form-control" name="client_zip_code" placeholder="Zip Code"
+                                           type="number" value="{{client.property|get_key:'zip_code'}}">
+                                </div>
+                            </div>
+                            <div class="">
+                                <input class="company_details_c_b" client.property|get_key: id="client_company_details"
+                                       if type="checkbox" {%'company_name' %} checked {% endif %} >
+                                <label for="client_company_details">Company Details (Optional)</label>
+                            </div>
+                            <div class="company_details {% if not client.property|get_key:'company_name' %} d-none {% endif %}">
+                                <div class="form-group row" style="padding-top:10px;">
+                                    <div class="col-sm-12">
+                                        <input class="form-control" name="client_c_n" placeholder="Company Name"
+                                               type="text" value="{{client.property|get_key:'company_name'}}">
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col-sm-12">
+                                        <input class="form-control" name="client_c_email" placeholder="Company Email"
+                                               type="email" value="{{client.property|get_key:'company_email'}}">
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col-sm-12">
+                                        <input class="form-control" name="client_c_w" placeholder="Company Website"
+                                               type="text" value="{{client.property|get_key:'company_website'}}">
+                                    </div>
+                                </div>
+                            </div>
+                            <input class="btn btn-success" type="submit">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<!-- /.container-fluid -->
+
+{% endblock %}

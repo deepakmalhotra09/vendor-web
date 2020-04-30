@@ -6,7 +6,7 @@ class VendorService(object):
         self.Vendor = Vendor
 
     @staticmethod
-    def add_vendor(vendor: Vendor):
+    def add_update_vendor(vendor: Vendor):
         vendor.save()
 
     @staticmethod
@@ -18,3 +18,17 @@ class VendorService(object):
     def delete_vendor(vendor_id: int) -> None:
         Vendor.objects.filter(id=vendor_id).delete()
         return None
+
+    @staticmethod
+    def get_vendor(id: int):
+        vendor = Vendor.objects.get(id=id)
+        if vendor:
+            return vendor
+        return Vendor()
+
+    @staticmethod
+    def get_vendor_by_name(vendor_name: str):
+        vendor = Vendor.objects.get(name=vendor_name)
+        if vendor:
+            return vendor
+        return Vendor()

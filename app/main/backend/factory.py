@@ -1,10 +1,12 @@
+from main.backend.client import ClientService
 from main.backend.vendor import VendorService
 
 
 class Factory():
     def __init__(self):
         self.service_list = {
-            'vendor': VendorService
+            'vendor': VendorService,
+            'client': ClientService
         }
 
     def get_service(self, service_name: str):

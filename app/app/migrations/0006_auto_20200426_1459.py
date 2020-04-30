@@ -2,8 +2,6 @@
 
 from django.db import migrations, models
 
-import main.core
-
 
 class Migration(migrations.Migration):
     dependencies = [
@@ -14,7 +12,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='vendor',
             name='mobile_no',
-            field=models.CharField(default='1234567890', max_length=12, validators=[main.core.validate_digit_length],
+            field=models.CharField(default='1234567890', max_length=12, validators=[],
                                    verbose_name='Phone number'),
         ),
     ]

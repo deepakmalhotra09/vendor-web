@@ -17,7 +17,6 @@ class BaseView(View):
             handler = getattr(self, 'index', None)
         else:
             method_name = segments[segment_count - 1].lower()
-            print(method_name)
             # method_name = re.sub('[^a-z0-9]', '', method_name)
             handler = getattr(self, method_name, None)
         print(handler)

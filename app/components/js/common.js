@@ -17,9 +17,11 @@ function getCookie(name) {
     return cookieValue;
 };
 
-$('#vendor_form').submit(function() {
-        var form_data = JSON.stringify($('#vendor_form').serializeObject());
-        url = base_url+'/ajax/add_vendor';
+$('#page_form').submit(function() {
+        var form_data = JSON.stringify($('#page_form').serializeObject());
+        var method_name = $('#form_method_name').val();
+        var list_slug = $('#list_slug').val();
+        url = base_url+'/ajax/'+method_name;
         $.ajax({
           type: "POST",
           url: url,
@@ -27,7 +29,7 @@ $('#vendor_form').submit(function() {
           data: {data: form_data},
           success: function(data, status){
             if(status == 'success'){
-                window.location = '/vendor';
+                window.location = '/'+list_slug;
             }
           }
         });
@@ -59,21 +61,21 @@ $( ".country_list" ).change(function() {
   $('.country_code').val(country_code);
 });
 
-$("[data-country=append]").each(function(index, element){
-    url = base_url+'/ajax/get_countries';
-    $.ajax({
-      type: "POST",
-      url: url,
-      dataType: 'json',
-      success: function(data, status){
-        var option_html = ''
-        $.each(data, function(index, value){
-            option_html += "<option code='"+value.code+"'>"+value.name+"</option>"
-        });
-        $(element).append(option_html)
-      }
-    });
-});
+//$("[data-country=append]").each(function(index, element){
+//    url = base_url+'/ajax/get_countries';
+//    $.ajax({
+//      type: "POST",
+//      url: url,
+//      dataType: 'json',
+//      success: function(data, status){
+//        var option_html = ''
+//        $.each(data, function(index, value){
+//            option_html += "<option code='"+value.code+"'>"+value.name+"</option>"
+//        });
+//        $(element).append(option_html)
+//      }
+//    });
+//});
 
 $(document).on('click','.company_details_c_b',function(){
     $('.company_details').toggleClass('d-none');
