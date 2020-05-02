@@ -38,8 +38,7 @@
                                     <select class="form-control" id="project_client_id">
                                         <option>Select Client</option>
                                         {% for client in clients %}
-                                        <option %} %} client.id|slugify== client_id="{{client.id}}" endif if
-                                                project.client_id selected {% {%>{{client.name}}
+                                        <option client_id="{{client.id}}" {% if client.id|slugify == project.client_id %} selected {% endif %}>{{client.name}}
                                         </option>
                                         {% endfor %}
                                     </select>

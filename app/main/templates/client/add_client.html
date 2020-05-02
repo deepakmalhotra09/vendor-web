@@ -49,8 +49,7 @@
                                             name="client_country">
                                         <option code="">Select country</option>
                                         {% for country in country_list %}
-                                        <option client.property|get_key: code="{{country.code}}" country.code== if {%
-                                        'country_code' %} selected {% endif %}>{{country.name}}</option>
+                                        <option code="{{country.code}}" {% if client.property|get_key:'country_code' == country.code %} selected {% endif %}>{{country.name}}</option>
                                         {% endfor %}
                                     </select>
                                     <input class="country_code" name="client_country_code" type="hidden" value="">
