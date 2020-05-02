@@ -60,22 +60,11 @@
                                            type="number" value="{{client.property|get_key:'zip_code'}}">
                                 </div>
                             </div>
-                            <div class="">
-                                <input class="company_details_c_b" client.property|get_key: id="client_company_details"
-                                       if type="checkbox" {%'company_name' %} checked {% endif %} >
-                                <label for="client_company_details">Company Details (Optional)</label>
-                            </div>
-                            <div class="company_details {% if not client.property|get_key:'company_name' %} d-none {% endif %}">
+                            <div class="company_details">
                                 <div class="form-group row" style="padding-top:10px;">
                                     <div class="col-sm-12">
                                         <input class="form-control" name="client_c_n" placeholder="Company Name"
                                                type="text" value="{{client.property|get_key:'company_name'}}">
-                                    </div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col-sm-12">
-                                        <input class="form-control" name="client_c_email" placeholder="Company Email"
-                                               type="email" value="{{client.property|get_key:'company_email'}}">
                                     </div>
                                 </div>
                                 <div class="row form-group">

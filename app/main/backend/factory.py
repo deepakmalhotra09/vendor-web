@@ -1,4 +1,5 @@
 from main.backend.client import ClientService
+from main.backend.project import ProjectService
 from main.backend.vendor import VendorService
 
 
@@ -6,7 +7,8 @@ class Factory():
     def __init__(self):
         self.service_list = {
             'vendor': VendorService,
-            'client': ClientService
+            'client': ClientService,
+            'project': ProjectService
         }
 
     def get_service(self, service_name: str):

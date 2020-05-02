@@ -49,11 +49,13 @@
                                             name="vendor_country">
                                         <option code="">Select country</option>
                                         {% for country in country_list %}
-                                        <option code="{{country.code}}" country.code== if vendor.property|get_key: {%
+                                        <option and code="{{country.code}}" country.code== if update_vendor
+                                                vendor.property|get_key: {%
                                         'country_code' %} selected {% endif %}>{{country.name}}</option>
                                         {% endfor %}
                                     </select>
-                                    <input class="country_code" name="vendor_country_code" type="hidden" value="">
+                                    <input class="country_code" name="vendor_country_code" type="hidden"
+                                           value="{{vendor.property|get_key:'country_code'}}">
                                 </div>
                                 <div class="col-sm-6">
                                     <input class="form-control" name="vendor_zip_code" placeholder="Zip Code"
@@ -61,8 +63,9 @@
                                 </div>
                             </div>
                             <div class="">
-                                <input class="company_details_c_b" id="vendor_company_details" if
-                                       type="checkbox" vendor.property|get_key: {%'company_name' %} checked {% endif %}
+                                <input class="company_details_c_b" id="vendor_company_details"
+                                       if type="checkbox" vendor.property|get_key: {%'company_name' %} checked {% endif
+                                %}
                                 >
                                 <label for="vendor_company_details">Company Details (Optional)</label>
                             </div>

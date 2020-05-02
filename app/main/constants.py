@@ -1,4 +1,4 @@
-views_list = ['vendor', 'ajax', 'client']
+views_list = ['vendor', 'ajax', 'client', 'project']
 countries = [
     {"name": "Afghanistan", "code": "AF"},
     {"name": "Åland Islands", "code": "AX"},

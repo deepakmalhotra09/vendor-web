@@ -2,7 +2,7 @@ import json
 
 from django.http import JsonResponse, HttpRequest
 
-from app.models import Vendor, Client
+from app.models import Vendor, Client, Project
 from main.backend.factory import Factory
 from main.constants import countries
 from main.core import get_request_param_json, get_request_param
@@ -66,9 +66,8 @@ class AjaxView(BaseView):
             'country': data.get('client_country', ''),
             'country_code': data.get('client_country_code', ''),
             'zip_code': data.get('client_zip_code', ''),
-            'company_email': data.get('client_c_email', ''),
-            'company_website': data.get('client_c_w', ''),
             'company_name': data.get('client_c_n', ''),
+            'company_website': data.get('client_c_w', ''),
         }
         client_service.add_update_client(client)
         return JsonResponse(data, safe=False)
@@ -79,3 +78,28 @@ class AjaxView(BaseView):
         client_service = factory_class.get_service('client')
         client_service.delete_client(client_id)
         return JsonResponse(client_id, safe=False)
+
+    def add_project(self, request: HttpRequest):
+        data = get_request_param_json('data', request)
+        project_id = int(data.get('project_id', ''))
+        factory_class = Factory()
+        project_service = factory_class.get_service('project')
+        project = Project()
+        if project_id:
+            project = project_service.get_project(project_id)
+        project.name = data.get('project_name', '')
+        project.client_id = data.get('project_client_id', '')
+        project.link = data.get('project_link', '')
+        project.target = data.get('project_target', '')
+        project.cost = data.get('project_cost', '')
+        project.start_date = data.get('project_start_date', '')
+        project.end_date = data.get('project_end_date', '')
+        project_service.add_update_project(project)
+        return JsonResponse(data, safe=False)
+
+    def delete_project(self, request: HttpRequest) -> json:
+        project_id = get_request_param('id', request)
+        factory_class = Factory()
+        project_service = factory_class.get_service('project')
+        project_service.delete_project(project_id)
+        return JsonResponse(project_id, safe=False)

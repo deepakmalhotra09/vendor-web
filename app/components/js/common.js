@@ -55,11 +55,26 @@ $.fn.serializeObject = function()
 
 $(document).ready(function(){
 
+$('.datepicker').datepicker({
+//    startDate: '-3d',
+    autoclose: true,
+    calendarWeeks: false,
+    todayHighlight: true
+});
+
 $( ".country_list" ).change(function() {
   var optionSelected = $("option:selected", this);
   var country_code = optionSelected.attr('code');
   $('.country_code').val(country_code);
 });
+
+$( "#project_client_id" ).change(function() {
+  var optionSelected = $("option:selected", this);
+  var client_id = optionSelected.attr('client_id');
+  $('.project_client_id').val(client_id);
+});
+
+
 
 //$("[data-country=append]").each(function(index, element){
 //    url = base_url+'/ajax/get_countries';

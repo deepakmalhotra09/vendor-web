@@ -1,0 +1,97 @@
+{% extends "templates/common/app.html" %}
+{% load app_filters %}
+{% block title %}Project{% endblock %}
+{% block content %}
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">{% if update_project %} Edit {% else %} Add {% endif %} Project</h1>
+    </div>
+
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row ">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-8">
+                    <div class="p-5">
+                        <div class="text-center">
+                            <!--                <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>-->
+                        </div>
+                        <input id="form_method_name" type="hidden" value="add_project">
+                        <input id="list_slug" type="hidden" value="project">
+                        <form class="add_vendor_form" id="page_form" method="post" name="">
+                            <input name="project_id" type="hidden"
+                                   value="{% if not project.id %}0{% else %}{{project.id}}{%endif%}">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label" for="project_name">Name</label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" id="project_name" name="project_name" type="text"
+                                           value="{{project.name}}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label" for="project_client_id">Client</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" id="project_client_id">
+                                        <option>Select Client</option>
+                                        {% for client in clients %}
+                                        <option %} %} client.id|slugify== client_id="{{client.id}}" endif if
+                                                project.client_id selected {% {%>{{client.name}}
+                                        </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <input class="project_client_id" name="project_client_id" type="hidden"
+                                       value="{{project.client_id}}">
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label" for="project_link">Link</label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" id="project_link" name="project_link" type="text"
+                                           value="{{project.link}}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label" for="project_target">Target</label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" id="project_target" name="project_target" type="text"
+                                           value="{{project.target}}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label" for="project_cost">Project Cost</label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" id="project_cost" name="project_cost" type="text"
+                                           value="{{project.cost}}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label" for="project_start_date">Start Date</label>
+                                <div class="col-sm-9">
+                                    <input class="form-control datepicker" data-date-format="yyyy-mm-dd"
+                                           id="project_start_date" name="project_start_date" placeholder="yyyy-mm-dd"
+                                           readonly type="text" value="{{project.start_date|date:'yy-m-d'}}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label" for="project_end_date">End Date</label>
+                                <div class="col-sm-9">
+                                    <input class="form-control datepicker" data-date-format="yyyy-mm-dd"
+                                           id="project_end_date" name="project_end_date" placeholder="yyyy-mm-dd"
+                                           readonly type="text" value="{{project.end_date|date:'yy-m-d'}}">
+                                </div>
+                            </div>
+                            <input class="btn btn-success" type="submit">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.container-fluid -->
+
+{% endblock %}
