@@ -2,12 +2,14 @@ from django.http import Http404
 from django.utils.encoding import escape_uri_path
 from django.views import View
 
+from main.backend.factory import Factory
 from main.constants import views_list
 
 
 class BaseView(View):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        self.factory = Factory()
 
     def dispatch(self, request, *args, **kwargs):
         uri = escape_uri_path(request.path)

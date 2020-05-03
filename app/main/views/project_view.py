@@ -6,19 +6,33 @@ from main.views.base_view import BaseView
 
 
 class ProjectView(BaseView):
+
     def index(self, request: HttpRequest):
-        factory = Factory()
-        project_service = factory.get_service('project')
+        project_service = self.factory.get_service('project')
         projects = project_service.get_projects()
         return TemplateResponse(request, 'templates/project/project.html',
                                 {'projects': projects})
 
     def add(self, request: HttpRequest):
-        factory = Factory()
-        client_service = factory.get_service('client')
+        client_service = self.factory.get_service('client')
         clients = client_service.get_clients()
         return TemplateResponse(request, 'templates/project/add_project.html',
                                 {'update_project': False, 'clients': clients})
+
+    def assign(self, request: HttpRequest):
+        vendor_service = self.factory.get_service('vendor')
+        vendors = vendor_service.get_vendors()
+        project_service = self.factory.get_service('project')
+        projects = project_service.get_projects()
+        return TemplateResponse(request, 'templates/project/assign_project.html',
+                                {'projects': projects, 'vendors': vendors})
+
+    def assignees(self, request: HttpRequest):
+        project_service = self.factory.get_service('project-assignee')
+        project_assignees = project_service.get_project_vendor_assignees()
+        print(project_assignees)
+        return TemplateResponse(request, 'templates/project/project_assignees.html',
+                                {'project_assignees': project_assignees})
 
 
 def edit_project(request: HttpRequest, project_id: int):
@@ -31,3 +45,4 @@ def edit_project(request: HttpRequest, project_id: int):
 
     return TemplateResponse(request, 'templates/project/add_project.html',
                             {'project': project, 'clients': clients, 'update_project': True})
+

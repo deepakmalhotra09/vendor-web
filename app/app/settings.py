@@ -154,3 +154,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "components")
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
+SITE_URL = 'https://matrix-vendor.com/'
+VENDOR_API_SLUG = 'api/vendor'
+CLIENT_API_SLUG = 'api/client'

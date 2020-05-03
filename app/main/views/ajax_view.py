@@ -2,7 +2,7 @@ import json
 
 from django.http import JsonResponse, HttpRequest
 
-from app.models import Vendor, Client, Project
+from app.models import Vendor, Client, Project, ProjectVendorAssign
 from main.backend.factory import Factory
 from main.constants import countries
 from main.core import get_request_param_json, get_request_param
@@ -81,13 +81,14 @@ class AjaxView(BaseView):
 
     def add_project(self, request: HttpRequest):
         data = get_request_param_json('data', request)
-        project_id = int(data.get('project_id', ''))
+        project_id = int(data.get('id', ''))
         factory_class = Factory()
         project_service = factory_class.get_service('project')
         project = Project()
         if project_id:
             project = project_service.get_project(project_id)
         project.name = data.get('project_name', '')
+        project.project_id = data.get('project_id', '')
         project.client_id = data.get('project_client_id', '')
         project.link = data.get('project_link', '')
         project.target = data.get('project_target', '')
@@ -103,3 +104,29 @@ class AjaxView(BaseView):
         project_service = factory_class.get_service('project')
         project_service.delete_project(project_id)
         return JsonResponse(project_id, safe=False)
+
+    def add_assignee(self, request: HttpRequest):
+        data = get_request_param_json('data', request)
+        project_vendor_assignee_id = int(data.get('id', ''))
+        factory_class = Factory()
+        project_vendor_assignee_service = factory_class.get_service('project-assignee')
+        project_service = factory_class.get_service('project')
+        project_vendor_assignee = ProjectVendorAssign()
+        if project_vendor_assignee_id:
+            project_vendor_assignee = project_vendor_assignee_service.get_project_vendor_assignee(
+                project_vendor_assignee_id)
+        project_id = data.get('project_id', '')
+        project = project_service.get_project(project_id)
+        client_project_id = project.project_id
+        links = {
+            'completed': data.get('project_completed_link', ''),
+            'quota_full': data.get('project_quota_full_link', ''),
+            'terminated': data.get('project_terminated_link', '')
+        }
+        project_vendor_assignee.project_id = project_id
+        project_vendor_assignee.client_project_id = client_project_id
+        project_vendor_assignee.vendor_id = data.get('vendor_id', '')
+        project_vendor_assignee.cost = data.get('cost', '')
+        project_vendor_assignee.links = links
+        project_vendor_assignee_service.add_update_project_vendor_assignee(project_vendor_assignee)
+        return JsonResponse(data, safe=False)

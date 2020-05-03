@@ -30,6 +30,7 @@
                         <tr>
                             <th>S no.</th>
                             <th>Name</th>
+                            <th>Project Id</th>
                             <th>Client</th>
                             <th>Link</th>
                             <th>Target</th>
@@ -44,6 +45,7 @@
                         <tr>
                             <td>{{forloop.counter}}</td>
                             <td>{{project.name}}</td>
+                            <td>{{project.project_id}}</td>
                             <td>{{project.client_id|get_client_name}}</td>
                             <td><a href="{{project.link}}" target="_blank">{{project.link}}</a></td>
                             <td>{{project.target}}</td>

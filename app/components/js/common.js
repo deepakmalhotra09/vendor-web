@@ -74,6 +74,17 @@ $( "#project_client_id" ).change(function() {
   $('.project_client_id').val(client_id);
 });
 
+$('.project_assignee_form #project').change(function(){
+    var optionSelected = $("option:selected", this);
+    var project_id = optionSelected.attr('project_id');
+    $('.project_assignee_form .project_id').val(project_id);
+});
+
+$('.project_assignee_form #vendor').change(function(){
+    var optionSelected = $("option:selected", this);
+    var vendor_id = optionSelected.attr('vendor_id');
+    $('.project_assignee_form .vendor_id').val(vendor_id);
+});
 
 
 //$("[data-country=append]").each(function(index, element){

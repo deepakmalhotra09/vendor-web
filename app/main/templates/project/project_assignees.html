@@ -1,0 +1,99 @@
+{% extends "templates/common/app.html" %}
+{% load app_filters %}
+{% block title %}Projects{% endblock %}
+{% block content %}
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Projects</h1>
+        <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" href="/project/assign"><i
+                class="fas fa-download fa-sm text-white-50"></i> Add New</a>
+    </div>
+
+    <!-- Content Row -->
+    <div class="card">
+
+        <!-- Content Column -->
+
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Assigned Projects</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table cellspacing="0" class="table table-bordered" id="dataTable" width="100%">
+                        <thead>
+                        <tr>
+                            <th>S no.</th>
+                            <th>Project Id</th>
+                            <th>Vendor</th>
+                            <th>Cost</th>
+                            <th>Vendor Link</th>
+                            <th>Links</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for project_assignee in project_assignees %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{project_assignee.client_project_id}}</td>
+                            <td>{{project_assignee.vendor_id|get_vendor_name}}</td>
+                            <td>Rs. {{project_assignee.cost}}</td>
+                            <td>{{project_assignee.vendor_id|generate_vendor_link:project_assignee.project_id}}</td>
+                            <td><a href="javascript:void(0);"
+                                   data-links="Completed : {{project_assignee.links|get_key:'completed'}}</br>Terminated : {{project_assignee.links|get_key:'terminated'}}</br>Quota Full : {{project_assignee.links|get_key:'quota_full'}}</br>"
+                                   class="openPopup">Show Links</a></td>
+                            <!--                            <td>{{project_assignee.links}}</td>-->
+                            <td>
+                                <a href="/project/edit_assignee/{{project_assignee.id}}" target="_self">Edit</a> |
+                                <a class="delete_record" data-id="{{project_assignee.id}}"
+                                   data-method-name="delete_project_assignee"
+                                   href="javascript:void(0);">Delete</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- /.container-fluid -->
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!--                    <button type="button" class="close" data-dismiss="modal">&times;</button>-->
+                    <h4 class="modal-title">Links</h4>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block javascript %}
+<script>
+     $('.openPopup').on('click',function(){
+        var dataLinks = $(this).attr('data-links');
+        $('#myModal').modal({show:true});
+        $('.modal-body').html(dataLinks);
+    });
+
+</script>
+{% endblock %}

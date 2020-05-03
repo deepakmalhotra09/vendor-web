@@ -23,13 +23,20 @@
                         <input id="form_method_name" type="hidden" value="add_project">
                         <input id="list_slug" type="hidden" value="project">
                         <form class="add_vendor_form" id="page_form" method="post" name="">
-                            <input name="project_id" type="hidden"
+                            <input name="id" type="hidden"
                                    value="{% if not project.id %}0{% else %}{{project.id}}{%endif%}">
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label" for="project_name">Name</label>
                                 <div class="col-sm-9">
                                     <input class="form-control" id="project_name" name="project_name" type="text"
                                            value="{{project.name}}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label" for="project_id">Project Id</label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" id="project_id" name="project_id" type="text"
+                                           value="{{project.project_id}}">
                                 </div>
                             </div>
                             <div class="form-group row">
