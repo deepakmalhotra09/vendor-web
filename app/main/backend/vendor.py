@@ -15,6 +15,11 @@ class VendorService(object):
         return vendors_obj
 
     @staticmethod
+    def get_total_vendor_count():
+        vendors_obj = Vendor.objects.all().count()
+        return vendors_obj
+
+    @staticmethod
     def delete_vendor(vendor_id: int) -> None:
         Vendor.objects.filter(id=vendor_id).delete()
         return None

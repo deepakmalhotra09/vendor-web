@@ -15,6 +15,12 @@ class ProjectService(object):
         return project_obj
 
     @staticmethod
+    def get_total_project_count():
+        project_obj = Project.objects.all().count()
+        return project_obj
+
+
+    @staticmethod
     def delete_project(project_id: int) -> None:
         Project.objects.filter(id=project_id).delete()
         return None

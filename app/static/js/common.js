@@ -56,7 +56,10 @@ $.fn.serializeObject = function()
 $(document).ready(function(){
 
 $('.datepicker').datepicker({
-    startDate: '-3d'
+//    startDate: '-3d',
+    autoclose: true,
+    calendarWeeks: false,
+    todayHighlight: true
 });
 
 $( ".country_list" ).change(function() {
@@ -64,6 +67,25 @@ $( ".country_list" ).change(function() {
   var country_code = optionSelected.attr('code');
   $('.country_code').val(country_code);
 });
+
+$( "#project_client_id" ).change(function() {
+  var optionSelected = $("option:selected", this);
+  var client_id = optionSelected.attr('client_id');
+  $('.project_client_id').val(client_id);
+});
+
+$('.project_assignee_form #project').change(function(){
+    var optionSelected = $("option:selected", this);
+    var project_id = optionSelected.attr('project_id');
+    $('.project_assignee_form .project_id').val(project_id);
+});
+
+$('.project_assignee_form #vendor').change(function(){
+    var optionSelected = $("option:selected", this);
+    var vendor_id = optionSelected.attr('vendor_id');
+    $('.project_assignee_form .vendor_id').val(vendor_id);
+});
+
 
 //$("[data-country=append]").each(function(index, element){
 //    url = base_url+'/ajax/get_countries';
@@ -98,5 +120,9 @@ $(document).on('click','.delete_record',function(){
       }
     });
 })
-$('#dataTable').DataTable();
+$('#dataTable').DataTable({
+    buttons: [
+        'copy', 'excel', 'pdf'
+    ]
+    });
 });

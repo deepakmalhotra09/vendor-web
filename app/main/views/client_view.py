@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpRequest
 from django.template.response import TemplateResponse
 
@@ -6,7 +8,7 @@ from main.constants import countries
 from main.views.base_view import BaseView
 
 
-class ClientView(BaseView):
+class ClientView(LoginRequiredMixin, BaseView):
     def index(self, request: HttpRequest):
         factory = Factory()
         client_service = factory.get_service('client')
@@ -19,6 +21,7 @@ class ClientView(BaseView):
                                 {'country_list': countries, 'update_client': False})
 
 
+@login_required()
 def edit_client(request: HttpRequest, client_id: int):
     factory = Factory()
     client_service = factory.get_service('client')

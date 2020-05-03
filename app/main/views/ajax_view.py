@@ -1,5 +1,6 @@
 import json
 
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse, HttpRequest
 
 from app.models import Vendor, Client, Project, ProjectVendorAssign
@@ -9,7 +10,7 @@ from main.core import get_request_param_json, get_request_param
 from main.views.base_view import BaseView
 
 
-class AjaxView(BaseView):
+class AjaxView(LoginRequiredMixin, BaseView):
     def __init__(self):
         super(AjaxView, self).__init__()
         self.factory = Factory()

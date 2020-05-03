@@ -16,4 +16,5 @@ class Factory():
         }
 
     def get_service(self, service_name: str):
-        return self.service_list.get(service_name, '')
+        service = self.service_list.get(service_name, '')
+        return service

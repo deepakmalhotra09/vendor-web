@@ -15,6 +15,11 @@ class ClientService(object):
         return client_obj
 
     @staticmethod
+    def get_total_client_count():
+        client_obj = Client.objects.all().count()
+        return client_obj
+
+    @staticmethod
     def delete_client(client_id: int) -> None:
         Client.objects.filter(id=client_id).delete()
         return None

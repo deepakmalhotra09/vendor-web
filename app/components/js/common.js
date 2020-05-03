@@ -120,5 +120,10 @@ $(document).on('click','.delete_record',function(){
       }
     });
 })
-$('#dataTable').DataTable();
+var table = $('#dataTable').DataTable( {
+        lengthChange: false,
+        buttons: [ 'copy', 'excel', 'pdf', 'print' ]
+    } );
+    table.buttons().container()
+        .appendTo( '#dataTable_wrapper .col-md-6:eq(0)' );
 });

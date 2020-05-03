@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpRequest
 from django.template.response import TemplateResponse
 
@@ -5,7 +7,7 @@ from main.backend.factory import Factory
 from main.views.base_view import BaseView
 
 
-class ProjectView(BaseView):
+class ProjectView(LoginRequiredMixin, BaseView):
 
     def index(self, request: HttpRequest):
         project_service = self.factory.get_service('project')
@@ -35,6 +37,7 @@ class ProjectView(BaseView):
                                 {'project_assignees': project_assignees})
 
 
+@login_required()
 def edit_project(request: HttpRequest, project_id: int):
     factory = Factory()
     project_service = factory.get_service('project')
