@@ -12,6 +12,7 @@ from main.views.base_view import BaseView
 class AjaxView(BaseView):
     def __init__(self):
         super(AjaxView, self).__init__()
+        self.factory = Factory()
 
     def index(self, request: HttpRequest):
         pass
@@ -23,8 +24,7 @@ class AjaxView(BaseView):
     def add_vendor(self, request: HttpRequest) -> json:
         data = get_request_param_json('data', request)
         vendor_id = int(data.get('vendor_id', ''))
-        factory_class = Factory()
-        vendor_service = factory_class.get_service('vendor')
+        vendor_service = self.factory.get_service('vendor')
         vendor = Vendor()
         if vendor_id:
             vendor = vendor_service.get_vendor(vendor_id)
@@ -45,16 +45,14 @@ class AjaxView(BaseView):
 
     def delete_vendor(self, request: HttpRequest) -> json:
         vendor_id = get_request_param('id', request)
-        factory_class = Factory()
-        vendor_service = factory_class.get_service('vendor')
+        vendor_service = self.factory.get_service('vendor')
         vendor_service.delete_vendor(vendor_id)
         return JsonResponse(vendor_id, safe=False)
 
     def add_client(self, request: HttpRequest) -> json:
         data = get_request_param_json('data', request)
         client_id = int(data.get('client_id', ''))
-        factory_class = Factory()
-        client_service = factory_class.get_service('client')
+        client_service = self.factory.get_service('client')
         client = Client()
         if client_id:
             client = client_service.get_client(client_id)
@@ -74,16 +72,14 @@ class AjaxView(BaseView):
 
     def delete_client(self, request: HttpRequest) -> json:
         client_id = get_request_param('id', request)
-        factory_class = Factory()
-        client_service = factory_class.get_service('client')
+        client_service = self.factory.get_service('client')
         client_service.delete_client(client_id)
         return JsonResponse(client_id, safe=False)
 
     def add_project(self, request: HttpRequest):
         data = get_request_param_json('data', request)
         project_id = int(data.get('id', ''))
-        factory_class = Factory()
-        project_service = factory_class.get_service('project')
+        project_service = self.factory.get_service('project')
         project = Project()
         if project_id:
             project = project_service.get_project(project_id)
@@ -100,17 +96,15 @@ class AjaxView(BaseView):
 
     def delete_project(self, request: HttpRequest) -> json:
         project_id = get_request_param('id', request)
-        factory_class = Factory()
-        project_service = factory_class.get_service('project')
+        project_service = self.factory.get_service('project')
         project_service.delete_project(project_id)
         return JsonResponse(project_id, safe=False)
 
     def add_assignee(self, request: HttpRequest):
         data = get_request_param_json('data', request)
         project_vendor_assignee_id = int(data.get('id', ''))
-        factory_class = Factory()
-        project_vendor_assignee_service = factory_class.get_service('project-assignee')
-        project_service = factory_class.get_service('project')
+        project_vendor_assignee_service = self.factory.get_service('project-assignee')
+        project_service = self.factory.get_service('project')
         project_vendor_assignee = ProjectVendorAssign()
         if project_vendor_assignee_id:
             project_vendor_assignee = project_vendor_assignee_service.get_project_vendor_assignee(
@@ -130,3 +124,9 @@ class AjaxView(BaseView):
         project_vendor_assignee.links = links
         project_vendor_assignee_service.add_update_project_vendor_assignee(project_vendor_assignee)
         return JsonResponse(data, safe=False)
+
+    def delete_project_assignee(self, request: HttpRequest) -> json:
+        project_assign_id = get_request_param('id', request)
+        project_assignee_service = self.factory.get_service('project-assignee')
+        project_assignee_service.delete_project_vendor_assignee(project_assign_id)
+        return JsonResponse(project_assign_id, safe=False)

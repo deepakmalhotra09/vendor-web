@@ -66,3 +66,27 @@ class ProjectVendorAssign(models.Model):
 
     class Meta:
         db_table = "app_project_vendor_assign"
+
+
+class ProjectVendorUserAssign(models.Model):
+    FORM_FILL_STATUS = (
+        ('none', 'None'),
+        ('completed', 'Completed'),
+        ('terminated', 'Terminated'),
+        ('quota_full', 'Quota Full')
+    )
+    id = models.AutoField(primary_key=True)
+    vendor_id = models.CharField(max_length=200)
+    project_id = models.CharField(max_length=200)
+    client_project_id = models.CharField(max_length=200)
+    user_id = models.CharField(max_length=200)
+    status = models.CharField(max_length=255, choices=FORM_FILL_STATUS, default=FORM_FILL_STATUS[0][0])
+    ip_address = models.CharField(max_length=255)
+    create_time = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.id
+
+    class Meta:
+        db_table = "app_project_vendor_user_assign"
+        unique_together = ('vendor_id', 'project_id', 'ip_address',)
