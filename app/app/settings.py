@@ -23,7 +23,7 @@ DJANGO_SETTINGS_MODULE = 'app.settings'
 SECRET_KEY = '9jar1+)=x!13*u7h=zn%a9vlg!l+=vvfsl65m40=1_19ys_nj6'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
