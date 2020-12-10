@@ -1,0 +1,71 @@
+{% extends "templates/common/app.html" %}
+{% load app_filters %}
+{% block title %}Projects{% endblock %}
+{% block content %}
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Projects</h1>
+        <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" href="/project/add"><i
+                class="fas fa-download fa-sm text-white-50"></i> Add New</a>
+    </div>
+
+    <!-- Content Row -->
+    <div class="card">
+
+        <!-- Content Column -->
+
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Projects</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table cellspacing="0" class="table table-bordered" id="dataTable" width="100%">
+                        <thead>
+                        <tr>
+                            <th>S no.</th>
+                            <th>Name</th>
+                            <th>Project Id</th>
+                            <th>Client</th>
+                            <th>Link</th>
+                            <th>Target</th>
+                            <th>Cost</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for project in projects %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{project.name}}</td>
+                            <td>{{project.project_id}}</td>
+                            <td>{{project.client_id|get_client_name}}</td>
+                            <td><a href="{{project.link}}" target="_blank">{{project.link}}</a></td>
+                            <td>{{project.target}}</td>
+                            <td>{{project.cost}}</td>
+                            <td>{{project.start_date}}</td>
+                            <td>{{project.end_date}}</td>
+                            <td>
+                                <a href="/project/edit/{{project.id}}" target="_self">Edit</a> |
+                                <a class="delete_record" data-id="{{project.id}}"
+                                   data-method-name="delete_project"
+                                   href="javascript:void(0);">Delete</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- /.container-fluid -->
+    {% endblock %}

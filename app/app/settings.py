@@ -23,7 +23,7 @@ DJANGO_SETTINGS_MODULE = 'app.settings'
 SECRET_KEY = '9jar1+)=x!13*u7h=zn%a9vlg!l+=vvfsl65m40=1_19ys_nj6'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -51,6 +51,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# CSRF_USE_SESSIONS = True
+# CSRF_COOKIE_HTTPONLY = True
+# CSRF_COOKIE_NAME = 'sstoken'
+# CSRF_COOKIE_SECURE = False
+
 ROOT_URLCONF = 'app.urls'
 
 TEMPLATES = [
@@ -65,6 +70,10 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'libraries': {
+                'app_filters': 'main.templatetags.app_filters',
+
+            }
         },
     },
 ]
@@ -73,6 +82,7 @@ TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
 )
+
 
 WSGI_APPLICATION = 'app.wsgi.application'
 
@@ -135,7 +145,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
@@ -145,3 +154,8 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "components")
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
+SITE_URL = 'https://matrix-vendor.com/'
+VENDOR_API_SLUG = 'api/vendor'
+CLIENT_API_SLUG = 'api/client'
+LOGIN_URL = '/login'
