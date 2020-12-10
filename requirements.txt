@@ -32,7 +32,7 @@ python-apt===0.9.3.5ubuntu2
 python-debian===0.1.21-nmu2ubuntu2
 pytz==2019.3
 pyxdg==0.25
-requests==2.2.1
+requests==2.20.0
 six==1.14.0
 software-center-aptd-plugins==0.0.0
 sqlparse==0.3.1
