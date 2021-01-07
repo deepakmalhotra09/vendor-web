@@ -13,7 +13,7 @@ gunicorn==20.0.4
 httplib2==0.8
 language-selector==0.1
 louis==2.5.3
-lxml==3.3.3
+lxml==4.6.2
 Mako==0.9.1
 MarkupSafe==0.18
 mysql-connector-python==8.0.11
