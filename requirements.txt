@@ -16,7 +16,7 @@ louis==2.5.3
 lxml==3.3.3
 Mako==0.9.1
 MarkupSafe==0.18
-mysql-connector-python==8.0.11
+mysql-connector-python==8.0.14
 mysqlclient==1.4.6
 oauthlib==0.6.1
 onboard==1.0.1
